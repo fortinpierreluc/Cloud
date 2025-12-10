@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { CloudPricingConfig, CalculationResult } from '../types';
 import { calculateCost, formatCurrency } from '../utils/pricingCalculator';
-import { calculateRequiredResources } from '../utils/vmCalculator';
 import jsPDF from 'jspdf';
 import datadisLogo from '../assets/Datadis.png';
 import './PricingCalculator.css';

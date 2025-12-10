@@ -1,5 +1,5 @@
 import { CloudPricingConfig, CalculationResult } from '../types';
-import { calculateVMConfiguration, calculateRequiredResources } from './vmCalculator';
+import { calculateVMConfiguration } from './vmCalculator';
 
 /**
  * Calcule le coût d'une VM selon ses spécifications
@@ -34,9 +34,6 @@ export function calculateCost(
 
   // Calculer la configuration des VMs
   const vmConfiguration = calculateVMConfiguration(numberOfUsers, config);
-  
-  // Calculer les ressources nécessaires
-  const resources = calculateRequiredResources(vmConfiguration, config);
   
   // Calculer les coûts
   const costs = config.costs;

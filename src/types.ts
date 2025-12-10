@@ -34,6 +34,9 @@ export interface ResourceCosts {
   // Licences SPLA
   terminalServerCALCost: number; // Coût par CAL Terminal Serveur (11,36 $)
   
+  // Licences supplémentaires
+  duoSecurityCost: number; // Coût par utilisateur pour Double authentification Duo Security (10,00 $)
+  
   // Spécifications des VMs (nombre de processeurs par défaut)
   vmSpecs: {
     mainServer: {
