@@ -1,0 +1,55 @@
+# Configuration pour datacloudis.bzhosting.ca
+
+# Activer le module de réécriture
+RewriteEngine On
+
+# Rediriger HTTP vers HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Forcer le domaine correct (éviter les problèmes de certificat)
+RewriteCond %{HTTP_HOST} !^datacloudis\.bzhosting\.ca$ [NC]
+RewriteCond %{HTTP_HOST} !^www\.datacloudis\.bzhosting\.ca$ [NC]
+RewriteRule ^(.*)$ https://datacloudis.bzhosting.ca/$1 [L,R=301]
+
+# Gestion des routes pour application React (SPA)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
+
+# En-têtes de sécurité
+<IfModule mod_headers.c>
+    # Forcer HTTPS pendant 1 an
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    
+    # Prévenir le clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Prévenir le MIME sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Protection XSS
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Configuration du cache
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# Compression GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
