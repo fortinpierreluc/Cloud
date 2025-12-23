@@ -3,6 +3,7 @@ import { CloudPricingConfig, CalculationResult } from '../types';
 import { calculateCost, formatCurrency } from '../utils/pricingCalculator';
 import jsPDF from 'jspdf';
 import datadisLogo from '../assets/Datadis.png';
+import bzLogo from '../../Public/Logobz-gros.png';
 import './PricingCalculator.css';
 
 interface PricingCalculatorProps {
@@ -396,8 +397,10 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
             <div className="modal-overlay" onClick={() => setShowInfo(false)}></div>
             <div className="modal-container">
               <div className="modal-header">
+                <div className="modal-icon">
+                  <img src={bzLogo} alt="Logo BZ" className="modal-logo" />
+                </div>
                 <div className="modal-title-section">
-                  <div className="modal-icon">☁️</div>
                   <div>
                     <h2 className="modal-title">Cloud Privé BZ</h2>
                     <p className="modal-subtitle">Excellence en infrastructure cloud - Rapport qualité/prix incomparable</p>
@@ -456,7 +459,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                   </div>
                   <p className="feature-intro">
                     Notre cloud privé offre un <strong>excellent rapport qualité/prix</strong>. Nous offrons deux formules adaptées aux besoins : 
-                    <strong> Colocation</strong> pour le contrôle total, et <strong>Environnement Partagé (IAAS)</strong> pour une solution économique. 
+                    <strong> Environnement dédié</strong> pour le contrôle total, et <strong>Environnement Partagé</strong> pour une solution économique. 
                     Dans tous les cas, vous bénéficiez de nos standards de qualité et de notre service humain exceptionnel.
                   </p>
                 </div>
@@ -467,15 +470,15 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                       <span className="feature-icon">🏢</span>
                       <h4>Centre de Données BZ</h4>
                     </div>
-                    <p>Notre centre de données dans les locaux de BZ inc. offre une infrastructure complète avec tous nos standards de qualité et redondance N+1.</p>
+                    <p>Notre centre de données dans les locaux de BZ inc. offre une infrastructure complète avec tous nos standards de qualité et redondance.</p>
                   </div>
 
                   <div className="datacenter-card">
                     <div className="feature-header">
                       <span className="feature-icon">🌐</span>
-                      <h4>Centre de Données Oricom (Sertex)</h4>
+                      <h4>Centre de Données Oricom (Serco)</h4>
                     </div>
-                    <p>Notre deuxième centre de données chez Oricom, salle Sertex, offre redondance géographique et haute disponibilité avec les mêmes standards de qualité.</p>
+                    <p>Notre deuxième centre de données chez Oricom, salle Serco, offre redondance géographique et haute disponibilité avec les mêmes standards de qualité.</p>
                   </div>
                 </div>
               </div>
