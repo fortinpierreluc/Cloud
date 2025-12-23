@@ -14,6 +14,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
+  const [showInfo, setShowInfo] = useState<boolean>(false);
 
   const performCalculation = () => {
     // Si le champ est vide, ne pas calculer
@@ -305,12 +306,15 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
       yPosition += 5;
     }
 
-    // TOTAL
-    checkPageBreak(15);
-    doc.setFontSize(16);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(100, 108, 255); // Couleur bleue pour le total
-    doc.text(`TOTAL ${exportData.periode.toUpperCase()}: ${exportData.total}`, pageWidth / 2, yPosition, { align: 'center' });
+    // Disclaimer
+    checkPageBreak(25);
+    yPosition += 5;
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'italic');
+    doc.setTextColor(100, 100, 100); // Gris
+    const disclaimerText = "Ces prix se veulent une estimation. Une évaluation d'un expert en infonuagique de BZ sera nécessaire pour confirmer les ressources nécessaires au bon fonctionnement de votre application.";
+    const splitDisclaimer = doc.splitTextToSize(disclaimerText, pageWidth - 2 * margin);
+    doc.text(splitDisclaimer, margin, yPosition);
     doc.setTextColor(0, 0, 0); // Remettre la couleur noire
 
     // Sauvegarder le PDF
@@ -380,6 +384,110 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
         <h1>Datacloudis</h1>
         <p className="subtitle">Estimez le coût de votre solution !</p>
         <img src={datadisLogo} alt="Datadis" className="header-logo" />
+        <button 
+          className="info-button"
+          onClick={() => setShowInfo(true)}
+        >
+          Pourquoi le Cloud de BZ ?
+        </button>
+        
+        {showInfo && (
+          <>
+            <div className="modal-overlay" onClick={() => setShowInfo(false)}></div>
+            <div className="modal-container">
+              <div className="modal-header">
+                <div className="modal-title-section">
+                  <div className="modal-icon">☁️</div>
+                  <div>
+                    <h2 className="modal-title">Cloud Privé BZ</h2>
+                    <p className="modal-subtitle">Excellence en infrastructure cloud - Rapport qualité/prix incomparable</p>
+                  </div>
+                </div>
+                <button className="modal-close" onClick={() => setShowInfo(false)}>×</button>
+              </div>
+
+              <div className="modal-body">
+                <div className="hero-section">
+                  <h3>Notre Cloud Privé : Notre Fierté</h3>
+                  <p>
+                    Le cloud privé de BZ inc. offre un <strong>excellent rapport qualité/prix</strong> avec des <strong>standards de qualité très élevés</strong> et un 
+                    <strong> service humain</strong> qui rend l'infonuagique accessible et très appréciée de plusieurs types d'entreprises et d'organisations.
+                  </p>
+                </div>
+
+                <div className="features-grid-top">
+                  <div className="feature-card">
+                    <div className="feature-header">
+                      <span className="feature-icon">🏆</span>
+                      <h4>Standards de Qualité Élevés</h4>
+                    </div>
+                    <p className="feature-intro">
+                      Nos <strong>standards sont très élevés</strong> et répondent aux besoins de nos clients avec excellence.
+                    </p>
+                    <ul className="feature-list">
+                      <li>Infrastructure robuste et redondante</li>
+                      <li>Deux centres de données géographiquement séparés</li>
+                      <li>Batteries multiples et climatisation contrôlée</li>
+                      <li>Monitoring et maintenance proactive</li>
+                    </ul>
+                  </div>
+
+                  <div className="feature-card">
+                    <div className="feature-header">
+                      <span className="feature-icon">👥</span>
+                      <h4>Service Humain Exceptionnel</h4>
+                    </div>
+                    <p className="feature-intro">
+                      C'est notre <strong>service humain</strong> qui fait toute la différence. Support réactif, personnalisé, et dédié. C'est ce qui rend notre cloud 
+                      privé <strong>très apprécié des clients du Québec et du Canada</strong>.
+                    </p>
+                    <ul className="feature-list">
+                      <li>Support réactif et personnalisé</li>
+                      <li>Accompagnement dédié</li>
+                      <li>Relation de confiance à long terme</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="feature-card feature-card-full">
+                  <div className="feature-header">
+                    <span className="feature-icon">💰</span>
+                    <h4>Rapport Qualité/Prix Incomparable</h4>
+                  </div>
+                  <p className="feature-intro">
+                    Notre cloud privé offre un <strong>excellent rapport qualité/prix</strong>. Nous offrons deux formules adaptées aux besoins : 
+                    <strong> Colocation</strong> pour le contrôle total, et <strong>Environnement Partagé (IAAS)</strong> pour une solution économique. 
+                    Dans tous les cas, vous bénéficiez de nos standards de qualité et de notre service humain exceptionnel.
+                  </p>
+                </div>
+
+                <div className="datacenters-section">
+                  <div className="datacenter-card">
+                    <div className="feature-header">
+                      <span className="feature-icon">🏢</span>
+                      <h4>Centre de Données BZ</h4>
+                    </div>
+                    <p>Notre centre de données dans les locaux de BZ inc. offre une infrastructure complète avec tous nos standards de qualité et redondance N+1.</p>
+                  </div>
+
+                  <div className="datacenter-card">
+                    <div className="feature-header">
+                      <span className="feature-icon">🌐</span>
+                      <h4>Centre de Données Oricom (Sertex)</h4>
+                    </div>
+                    <p>Notre deuxième centre de données chez Oricom, salle Sertex, offre redondance géographique et haute disponibilité avec les mêmes standards de qualité.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="modal-footer">
+                <button className="modal-close-button" onClick={() => setShowInfo(false)}>
+                  Fermer
+                </button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="calculator-content">
@@ -651,6 +759,13 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                     </div>
                   </>
                 )}
+              </div>
+
+              {/* Disclaimer */}
+              <div className="disclaimer-box">
+                <p className="disclaimer-text">
+                  Ces prix se veulent une estimation. Une évaluation d'un expert en infonuagique de BZ sera nécessaire pour confirmer les ressources nécessaires au bon fonctionnement de votre application.
+                </p>
               </div>
 
               <div className="result-actions">

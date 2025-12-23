@@ -156,3 +156,5 @@ Merci!
 
 **Note importante:** Le problème de certificat SSL se règle principalement côté hébergeur dans le panneau de contrôle. Les fichiers de configuration que j'ai créés vont aider avec les redirections et la sécurité, mais le certificat SSL doit être installé via votre interface bzhosting.
 
+
+
