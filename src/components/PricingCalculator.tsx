@@ -10,12 +10,357 @@ interface PricingCalculatorProps {
   config: CloudPricingConfig;
 }
 
+type Language = 'en' | 'fr';
+
+interface Translations {
+  header: {
+    title: string;
+    subtitle: string;
+    whyBzButton: string;
+  };
+  modal: {
+    title: string;
+    subtitle: string;
+    heroTitle: string;
+    heroContent: string;
+    qualityTitle: string;
+    qualityIntro: string;
+    qualityFeatures: string[];
+    serviceTitle: string;
+    serviceIntro: string;
+    serviceFeatures: string[];
+    priceTitle: string;
+    priceIntro: string;
+    datacenterBzTitle: string;
+    datacenterBzContent: string;
+    datacenterOricomTitle: string;
+    datacenterOricomContent: string;
+    closeButton: string;
+  };
+  input: {
+    label: string;
+    placeholder: string;
+    minimum: string;
+    maximum: string;
+    calculateButton: string;
+  };
+  errors: {
+    minUsers: string;
+    maxUsers: string;
+    cannotCalculate: string;
+  };
+  results: {
+    title: string;
+    users: string;
+    user: string;
+    vmConfigTitle: string;
+    mainServer: string;
+    mainServerFull: string;
+    terminalServers: string;
+    totalVMs: string;
+    costDetailsTitle: string;
+    monthly: string;
+    annual: string;
+    userLicenses: string;
+    database: string;
+    gateways: string;
+    supportAccess: string;
+    supportAccessTitle: string;
+    cloudResources: string;
+    virtualMachines: string;
+    processors: string;
+    ramProvisioned: string;
+    diskSpace: string;
+    subtotalResources: string;
+    licenses: string;
+    calTerminalServer: string;
+    duoSecurity: string;
+    subtotalLicenses: string;
+    total: string;
+    onboardingFee: string;
+    setupFee: string;
+    setupFeeUnique: string;
+    disclaimer: string;
+    exportButton: string;
+    printButton: string;
+    exportDate: string;
+  };
+  pdf: {
+    title: string;
+    exportDate: string;
+    infoSection: string;
+    numberOfUsers: string;
+    billingPeriod: string;
+    vmConfigSection: string;
+    mainServer: string;
+    usersOnMainServer: string;
+    terminalServers: string;
+    totalVMs: string;
+    cloudResourcesSection: string;
+    virtualMachines: string;
+    processors: string;
+    ramProvisioned: string;
+    diskSpace: string;
+    subtotalResources: string;
+    licensesSection: string;
+    calTerminalServer: string;
+    duoSecurity: string;
+    subtotalLicenses: string;
+    supportAccessSection: string;
+    supportAccessMin: string;
+    setupFeesSection: string;
+    setupFee: string;
+    onboardingFee: string;
+    totalMonthly: string;
+    totalAnnual: string;
+    monthly: string;
+    annual: string;
+    disclaimer: string;
+  };
+}
+
+const translations: Record<Language, Translations> = {
+  en: {
+    header: {
+      title: 'Datacloudis',
+      subtitle: 'Estimate the cost of your solution!',
+      whyBzButton: 'Why BZ Cloud?',
+    },
+    modal: {
+      title: 'BZ Private Cloud',
+      subtitle: 'Excellence in cloud infrastructure - Unbeatable quality/price ratio',
+      heroTitle: 'Our Private Cloud: Our Pride',
+      heroContent: 'BZ inc.\'s private cloud offers an excellent quality/price ratio with very high quality standards and a human service that makes cloud computing accessible and highly appreciated by various types of businesses and organizations.',
+      qualityTitle: 'High Quality Standards',
+      qualityIntro: 'Our standards are very high and meet our clients\' needs with excellence.',
+      qualityFeatures: [
+        'Robust and redundant infrastructure',
+        'Two geographically separated data centers',
+        'Multiple batteries and controlled air conditioning',
+        'Proactive monitoring and maintenance',
+      ],
+      serviceTitle: 'Exceptional Human Service',
+      serviceIntro: 'It\'s our human service that makes all the difference. Responsive, personalized, and dedicated support. This is what makes our private cloud highly appreciated by clients in Quebec and Canada.',
+      serviceFeatures: [
+        'Responsive and personalized support',
+        'Dedicated accompaniment',
+        'Long-term trust relationship',
+      ],
+      priceTitle: 'Unbeatable Quality/Price Ratio',
+      priceIntro: 'Our private cloud offers an excellent quality/price ratio. We offer two formulas adapted to needs: Dedicated Environment for total control, and Shared Environment for an economical solution. In all cases, you benefit from our quality standards and exceptional human service.',
+      datacenterBzTitle: 'BZ Data Center',
+      datacenterBzContent: 'Our data center at BZ inc. premises offers complete infrastructure with all our quality and redundancy standards.',
+      datacenterOricomTitle: 'Oricom Data Center (Serco)',
+      datacenterOricomContent: 'Our second data center at Oricom, Serco room, offers geographic redundancy and high availability with the same quality standards.',
+      closeButton: 'Close',
+    },
+    input: {
+      label: 'Number of users',
+      placeholder: 'Enter here',
+      minimum: 'Minimum',
+      maximum: 'Maximum',
+      calculateButton: 'Calculate 💰',
+    },
+    errors: {
+      minUsers: 'The minimum number of users is',
+      maxUsers: 'The maximum number of users is',
+      cannotCalculate: 'Unable to calculate the cost for this number of users',
+    },
+    results: {
+      title: 'Calculation Result',
+      users: 'users',
+      user: 'user',
+      vmConfigTitle: 'Virtual Server Configuration',
+      mainServer: 'Main server (MIR-RT + Database):',
+      mainServerFull: 'Main server (MIR-RT + Database + Terminal Server):',
+      terminalServers: 'Additional Terminal Servers:',
+      totalVMs: 'Total VMs:',
+      costDetailsTitle: 'Cost Details',
+      monthly: 'monthly',
+      annual: 'annual',
+      userLicenses: 'User licenses:',
+      database: 'Database:',
+      gateways: 'Gateways:',
+      supportAccess: 'Technical support access:',
+      supportAccessTitle: 'TECHNICAL SUPPORT ACCESS',
+      cloudResources: 'CLOUD RESOURCES',
+      virtualMachines: 'Virtual machines',
+      processors: 'Processors',
+      ramProvisioned: 'Provisioned RAM',
+      diskSpace: 'Provisioned Disk Space',
+      subtotalResources: 'Subtotal - Cloud Resources:',
+      licenses: 'LICENSES',
+      calTerminalServer: 'Terminal Server CAL',
+      duoSecurity: 'Duo Security Two-Factor Authentication',
+      subtotalLicenses: 'Subtotal - Licenses:',
+      total: 'Total',
+      onboardingFee: 'Onboarding fee:',
+      setupFee: 'Setup fee:',
+      setupFeeUnique: 'Setup fee (one-time):',
+      disclaimer: 'These prices are an estimate. An evaluation by a BZ cloud expert will be necessary to confirm the resources needed for the proper functioning of your application.',
+      exportButton: '📥 Export Quote',
+      printButton: '🖨️ Print',
+      exportDate: 'Export date and time:',
+    },
+    pdf: {
+      title: 'MIR-RT CLOUD HOSTING QUOTE',
+      exportDate: 'Export date and time:',
+      infoSection: 'INFORMATION',
+      numberOfUsers: 'Number of users:',
+      billingPeriod: 'Billing period:',
+      vmConfigSection: 'VIRTUAL SERVER CONFIGURATION',
+      mainServer: 'Main server (MIR-RT + Database):',
+      usersOnMainServer: '  - Users on main server:',
+      terminalServers: 'Terminal Servers:',
+      totalVMs: 'Total VMs:',
+      cloudResourcesSection: 'CLOUD RESOURCES',
+      virtualMachines: 'Virtual machines',
+      processors: 'Processors',
+      ramProvisioned: 'Provisioned RAM',
+      diskSpace: 'Provisioned Disk Space',
+      subtotalResources: 'Subtotal - Cloud Resources:',
+      licensesSection: 'LICENSES',
+      calTerminalServer: 'Terminal Server CAL',
+      duoSecurity: 'Duo Security Two-Factor Authentication',
+      subtotalLicenses: 'Subtotal - Licenses:',
+      supportAccessSection: 'TECHNICAL SUPPORT ACCESS',
+      supportAccessMin: 'Technical support access (minimum $100):',
+      setupFeesSection: 'ONE-TIME FEES',
+      setupFee: 'Setup fee:',
+      onboardingFee: 'Onboarding fee:',
+      totalMonthly: 'MONTHLY TOTAL:',
+      totalAnnual: 'ANNUAL TOTAL:',
+      monthly: 'Monthly',
+      annual: 'Annual',
+      disclaimer: 'These prices are an estimate. An evaluation by a BZ cloud expert will be necessary to confirm the resources needed for the proper functioning of your application.',
+    },
+  },
+  fr: {
+    header: {
+      title: 'Datacloudis',
+      subtitle: 'Estimez le coût de votre solution !',
+      whyBzButton: 'Pourquoi le Cloud de BZ ?',
+    },
+    modal: {
+      title: 'Cloud Privé BZ',
+      subtitle: 'Excellence en infrastructure cloud - Rapport qualité/prix incomparable',
+      heroTitle: 'Notre Cloud Privé : Notre Fierté',
+      heroContent: 'Le cloud privé de BZ inc. offre un excellent rapport qualité/prix avec des standards de qualité très élevés et un service humain qui rend l\'infonuagique accessible et très appréciée de plusieurs types d\'entreprises et d\'organisations.',
+      qualityTitle: 'Standards de Qualité Élevés',
+      qualityIntro: 'Nos standards sont très élevés et répondent aux besoins de nos clients avec excellence.',
+      qualityFeatures: [
+        'Infrastructure robuste et redondante',
+        'Deux centres de données géographiquement séparés',
+        'Batteries multiples et climatisation contrôlée',
+        'Monitoring et maintenance proactive',
+      ],
+      serviceTitle: 'Service Humain Exceptionnel',
+      serviceIntro: 'C\'est notre service humain qui fait toute la différence. Support réactif, personnalisé, et dédié. C\'est ce qui rend notre cloud privé très apprécié des clients du Québec et du Canada.',
+      serviceFeatures: [
+        'Support réactif et personnalisé',
+        'Accompagnement dédié',
+        'Relation de confiance à long terme',
+      ],
+      priceTitle: 'Rapport Qualité/Prix Incomparable',
+      priceIntro: 'Notre cloud privé offre un excellent rapport qualité/prix. Nous offrons deux formules adaptées aux besoins : Environnement dédié pour le contrôle total, et Environnement Partagé pour une solution économique. Dans tous les cas, vous bénéficiez de nos standards de qualité et de notre service humain exceptionnel.',
+      datacenterBzTitle: 'Centre de Données BZ',
+      datacenterBzContent: 'Notre centre de données dans les locaux de BZ inc. offre une infrastructure complète avec tous nos standards de qualité et redondance.',
+      datacenterOricomTitle: 'Centre de Données Oricom (Serco)',
+      datacenterOricomContent: 'Notre deuxième centre de données chez Oricom, salle Serco, offre redondance géographique et haute disponibilité avec les mêmes standards de qualité.',
+      closeButton: 'Fermer',
+    },
+    input: {
+      label: 'Nombre d\'usagers',
+      placeholder: 'Entrer ici',
+      minimum: 'Minimum',
+      maximum: 'Maximum',
+      calculateButton: 'Calculer 💰',
+    },
+    errors: {
+      minUsers: 'Le nombre minimum d\'usagers est de',
+      maxUsers: 'Le nombre maximum d\'usagers est de',
+      cannotCalculate: 'Impossible de calculer le coût pour ce nombre d\'usagers',
+    },
+    results: {
+      title: 'Résultat du calcul',
+      users: 'usagers',
+      user: 'usager',
+      vmConfigTitle: 'Configuration des serveurs virtuels',
+      mainServer: 'Serveur principal (MIR-RT + Base de données):',
+      mainServerFull: 'Serveur principal (MIR-RT + Base de données + Terminal Server):',
+      terminalServers: 'Terminal Servers supplémentaires:',
+      totalVMs: 'Total de VMs:',
+      costDetailsTitle: 'Détail des coûts',
+      monthly: 'mensuel',
+      annual: 'annuel',
+      userLicenses: 'Licences utilisateurs:',
+      database: 'Base de données:',
+      gateways: 'Passerelles:',
+      supportAccess: 'Accès au soutien technique:',
+      supportAccessTitle: 'ACCÈS AU SOUTIEN TECHNIQUE',
+      cloudResources: 'RESSOURCES INFONUAGIQUE',
+      virtualMachines: 'Machines virtuelles',
+      processors: 'Processeurs',
+      ramProvisioned: 'RAM Provisionné',
+      diskSpace: 'Espace disque Provisionné',
+      subtotalResources: 'Sous-total - Ressources Infonuagique:',
+      licenses: 'LICENCES',
+      calTerminalServer: 'CAL Terminal Serveur',
+      duoSecurity: 'Double authentification Duo Security',
+      subtotalLicenses: 'Sous-total - Licences:',
+      total: 'Total',
+      onboardingFee: 'Frais de prise en charge:',
+      setupFee: 'Frais d\'installation:',
+      setupFeeUnique: 'Frais d\'installation (unique):',
+      disclaimer: 'Ces prix se veulent une estimation. Une évaluation d\'un expert en infonuagique de BZ sera nécessaire pour confirmer les ressources nécessaires au bon fonctionnement de votre application.',
+      exportButton: '📥 Exporter la soumission',
+      printButton: '🖨️ Imprimer',
+      exportDate: 'Date et heure d\'exportation:',
+    },
+    pdf: {
+      title: 'SOUMISSION D\'HÉBERGEMENT CLOUD MIR-RT',
+      exportDate: 'Date et heure d\'exportation:',
+      infoSection: 'INFORMATIONS',
+      numberOfUsers: 'Nombre d\'usagers:',
+      billingPeriod: 'Période de facturation:',
+      vmConfigSection: 'CONFIGURATION DES SERVEURS VIRTUELS',
+      mainServer: 'Serveur principal (MIR-RT + Base de données):',
+      usersOnMainServer: '  - Usagers sur le serveur principal:',
+      terminalServers: 'Terminal Servers:',
+      totalVMs: 'Total de VMs:',
+      cloudResourcesSection: 'RESSOURCES INFONUAGIQUE',
+      virtualMachines: 'Machines virtuelles',
+      processors: 'Processeurs',
+      ramProvisioned: 'RAM Provisionné',
+      diskSpace: 'Espace disque Provisionné',
+      subtotalResources: 'Sous-total - Ressources Infonuagique:',
+      licensesSection: 'LICENCES',
+      calTerminalServer: 'CAL Terminal Serveur',
+      duoSecurity: 'Double authentification Duo Security',
+      subtotalLicenses: 'Sous-total - Licences:',
+      supportAccessSection: 'ACCÈS AU SOUTIEN TECHNIQUE',
+      supportAccessMin: 'Accès au soutien technique (minimum 100 $):',
+      setupFeesSection: 'FRAIS UNIQUES',
+      setupFee: 'Frais d\'installation:',
+      onboardingFee: 'Frais de prise en charge:',
+      totalMonthly: 'TOTAL MENSUEL:',
+      totalAnnual: 'TOTAL ANNUEL:',
+      monthly: 'Mensuel',
+      annual: 'Annuel',
+      disclaimer: 'Ces prix se veulent une estimation. Une évaluation d\'un expert en infonuagique de BZ sera nécessaire pour confirmer les ressources nécessaires au bon fonctionnement de votre application.',
+    },
+  },
+};
+
 export default function PricingCalculator({ config }: PricingCalculatorProps) {
+  const [language, setLanguage] = useState<Language>('en');
   const [numberOfUsers, setNumberOfUsers] = useState<number | ''>('');
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
   const [showInfo, setShowInfo] = useState<boolean>(false);
+
+  const t = translations[language];
 
   const performCalculation = () => {
     // Si le champ est vide, ne pas calculer
@@ -34,11 +379,11 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
     } else {
       setResult(null);
       if (config.prerequisites?.minUsers && numUsers < config.prerequisites.minUsers) {
-        setError(`Le nombre minimum d'usagers est de ${config.prerequisites.minUsers}`);
+        setError(`${t.errors.minUsers} ${config.prerequisites.minUsers}`);
       } else if (config.prerequisites?.maxUsers && numUsers > config.prerequisites.maxUsers) {
-        setError(`Le nombre maximum d'usagers est de ${config.prerequisites.maxUsers}`);
+        setError(`${t.errors.maxUsers} ${config.prerequisites.maxUsers}`);
       } else {
-        setError('Impossible de calculer le coût pour ce nombre d\'usagers');
+        setError(t.errors.cannotCalculate);
       }
     }
   };
@@ -61,9 +406,10 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
 
     const vmConfig = result.vmConfiguration;
     const now = new Date();
+    const locale = language === 'fr' ? 'fr-CA' : 'en-CA';
     const exportData = {
-      date: now.toLocaleDateString('fr-CA'),
-      dateTime: now.toLocaleString('fr-CA', { 
+      date: now.toLocaleDateString(locale),
+      dateTime: now.toLocaleString(locale, { 
         year: 'numeric', 
         month: '2-digit', 
         day: '2-digit',
@@ -86,13 +432,13 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
         : 'N/A',
       coutBaseDonnees: result.breakdown.databaseCost > 0
         ? formatCurrency(result.breakdown.databaseCost, result.currency)
-        : 'Inclus',
+        : language === 'fr' ? 'Inclus' : 'Included',
       coutPasserelles: result.breakdown.gatewayCost > 0
         ? formatCurrency(result.breakdown.gatewayCost, result.currency)
         : 'N/A',
       fraisSupport: result.breakdown.additionalCosts > 0
         ? formatCurrency(result.breakdown.additionalCosts, result.currency)
-        : 'Inclus',
+        : language === 'fr' ? 'Inclus' : 'Included',
       fraisSoutienTechnique: result.additionalFees.supportAccess
         ? formatCurrency(result.additionalFees.supportAccess, result.currency)
         : 'N/A',
@@ -104,7 +450,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
         : 'N/A',
       sousTotal: formatCurrency(result.subtotal, result.currency),
       total: formatCurrency(result.total, result.currency),
-      periode: result.billingPeriod === 'monthly' ? 'Mensuel' : 'Annuel',
+      periode: result.billingPeriod === 'monthly' ? t.pdf.monthly : t.pdf.annual,
     };
 
     // Créer un nouveau document PDF
@@ -124,53 +470,53 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
     // Titre principal
     doc.setFontSize(18);
     doc.setFont('helvetica', 'bold');
-    doc.text('SOUMISSION D\'HÉBERGEMENT CLOUD MIR-RT', pageWidth / 2, yPosition, { align: 'center' });
+    doc.text(t.pdf.title, pageWidth / 2, yPosition, { align: 'center' });
     yPosition += 10;
 
     // Date et heure d'exportation
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
-    doc.text(`Date et heure d'exportation: ${exportData.dateTime}`, pageWidth / 2, yPosition, { align: 'center' });
+    doc.text(`${t.pdf.exportDate} ${exportData.dateTime}`, pageWidth / 2, yPosition, { align: 'center' });
     yPosition += 15;
 
     // Section INFORMATIONS
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
-    doc.text('INFORMATIONS', margin, yPosition);
+    doc.text(t.pdf.infoSection, margin, yPosition);
     yPosition += 8;
 
     doc.setFontSize(11);
     doc.setFont('helvetica', 'normal');
-    doc.text(`Nombre d'usagers: ${exportData.nombreUsagers}`, margin + 5, yPosition);
+    doc.text(`${t.pdf.numberOfUsers} ${exportData.nombreUsagers}`, margin + 5, yPosition);
     yPosition += 7;
-    doc.text(`Période de facturation: ${exportData.periode}`, margin + 5, yPosition);
+    doc.text(`${t.pdf.billingPeriod} ${exportData.periode}`, margin + 5, yPosition);
     yPosition += 12;
 
     // Section CONFIGURATION DES SERVEURS VIRTUELS
     checkPageBreak(30);
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
-    doc.text('CONFIGURATION DES SERVEURS VIRTUELS', margin, yPosition);
+    doc.text(t.pdf.vmConfigSection, margin, yPosition);
     yPosition += 8;
 
     doc.setFontSize(11);
     doc.setFont('helvetica', 'normal');
-    doc.text(`Serveur principal (MIR-RT + Base de données): ${exportData.vmServeurPrincipal} VM`, margin + 5, yPosition);
+    doc.text(`${t.pdf.mainServer} ${exportData.vmServeurPrincipal} VM`, margin + 5, yPosition);
     yPosition += 7;
-    doc.text(`  - Usagers sur le serveur principal: ${exportData.usagersSurServeurPrincipal}`, margin + 5, yPosition);
+    doc.text(`${t.pdf.usersOnMainServer} ${exportData.usagersSurServeurPrincipal}`, margin + 5, yPosition);
     yPosition += 7;
     if (exportData.vmTerminalServers > 0) {
-      doc.text(`Terminal Servers: ${exportData.vmTerminalServers} VM(s)`, margin + 5, yPosition);
+      doc.text(`${t.pdf.terminalServers} ${exportData.vmTerminalServers} VM(s)`, margin + 5, yPosition);
       yPosition += 7;
     }
-    doc.text(`Total de VMs: ${exportData.totalVMs}`, margin + 5, yPosition);
+    doc.text(`${t.pdf.totalVMs} ${exportData.totalVMs}`, margin + 5, yPosition);
     yPosition += 12;
 
     // Section RESSOURCES INFONUAGIQUE (selon la grille Couts.pdf)
     checkPageBreak(50);
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
-    doc.text('RESSOURCES INFONUAGIQUE', margin, yPosition);
+    doc.text(t.pdf.cloudResourcesSection, margin, yPosition);
     yPosition += 8;
 
     doc.setFontSize(11);
@@ -201,16 +547,16 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
     const diskGB = (100 + config.serverResources.mainServer.disk) + 
                   (result.breakdown.terminalServerResources ? (100 + config.serverResources.terminalServer.disk) * result.breakdown.terminalServerResources.count : 0);
 
-    doc.text(`Machines virtuelles (${nbVMs} VM × ${formatCurrency(config.costs.vmBaseCost, result.currency)}): ${formatCurrency(totalVMBase, result.currency)}`, margin + 5, yPosition);
+    doc.text(`${t.pdf.virtualMachines} (${nbVMs} VM × ${formatCurrency(config.costs.vmBaseCost, result.currency)}): ${formatCurrency(totalVMBase, result.currency)}`, margin + 5, yPosition);
     yPosition += 7;
-    doc.text(`Processeurs (${nbCPUs} × ${formatCurrency(config.costs.cpuCost, result.currency)}): ${formatCurrency(totalCPUs, result.currency)}`, margin + 5, yPosition);
+    doc.text(`${t.pdf.processors} (${nbCPUs} × ${formatCurrency(config.costs.cpuCost, result.currency)}): ${formatCurrency(totalCPUs, result.currency)}`, margin + 5, yPosition);
     yPosition += 7;
-    doc.text(`RAM Provisionné (${ramGB.toFixed(1)} Go × ${formatCurrency(config.costs.ramCostPerGB, result.currency)}): ${formatCurrency(totalRAM, result.currency)}`, margin + 5, yPosition);
+    doc.text(`${t.pdf.ramProvisioned} (${ramGB.toFixed(1)} Go × ${formatCurrency(config.costs.ramCostPerGB, result.currency)}): ${formatCurrency(totalRAM, result.currency)}`, margin + 5, yPosition);
     yPosition += 7;
-    doc.text(`Espace disque Provisionné (${diskGB} Go × ${formatCurrency(config.costs.diskCostPerGB, result.currency)}): ${formatCurrency(totalDisk, result.currency)}`, margin + 5, yPosition);
+    doc.text(`${t.pdf.diskSpace} (${diskGB} Go × ${formatCurrency(config.costs.diskCostPerGB, result.currency)}): ${formatCurrency(totalDisk, result.currency)}`, margin + 5, yPosition);
     yPosition += 7;
     doc.setFont('helvetica', 'bold');
-    doc.text(`Sous-total - Ressources Infonuagique: ${formatCurrency(subtotalResources, result.currency)}`, margin + 5, yPosition);
+    doc.text(`${t.pdf.subtotalResources} ${formatCurrency(subtotalResources, result.currency)}`, margin + 5, yPosition);
     yPosition += 12;
 
     // Section LICENCES
@@ -218,7 +564,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
       checkPageBreak(25);
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
-      doc.text('LICENCES', margin, yPosition);
+      doc.text(t.pdf.licensesSection, margin, yPosition);
       yPosition += 8;
 
       doc.setFontSize(11);
@@ -226,13 +572,13 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
       
       // Licences SPLA
       if (result.breakdown.terminalServerCALCost > 0) {
-        doc.text(`CAL Terminal Serveur (${result.numberOfUsers} CAL × ${formatCurrency(config.costs.terminalServerCALCost, result.currency)}): ${formatCurrency(result.breakdown.terminalServerCALCost, result.currency)}`, margin + 5, yPosition);
+        doc.text(`${t.pdf.calTerminalServer} (${result.numberOfUsers} CAL × ${formatCurrency(config.costs.terminalServerCALCost, result.currency)}): ${formatCurrency(result.breakdown.terminalServerCALCost, result.currency)}`, margin + 5, yPosition);
         yPosition += 7;
       }
       
       // Double authentification Duo Security
       if (result.breakdown.duoSecurityCost > 0) {
-        doc.text(`Double authentification Duo Security (${result.numberOfUsers} utilisateurs × ${formatCurrency(config.costs.duoSecurityCost, result.currency)}): ${formatCurrency(result.breakdown.duoSecurityCost, result.currency)}`, margin + 5, yPosition);
+        doc.text(`${t.pdf.duoSecurity} (${result.numberOfUsers} ${language === 'fr' ? 'utilisateurs' : 'users'} × ${formatCurrency(config.costs.duoSecurityCost, result.currency)}): ${formatCurrency(result.breakdown.duoSecurityCost, result.currency)}`, margin + 5, yPosition);
         yPosition += 7;
       }
       
@@ -240,7 +586,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
       if (result.breakdown.terminalServerCALCost > 0 || result.breakdown.duoSecurityCost > 0) {
         const totalLicenses = (result.breakdown.terminalServerCALCost || 0) + (result.breakdown.duoSecurityCost || 0);
         doc.setFont('helvetica', 'bold');
-        doc.text(`Sous-total - Licences: ${formatCurrency(totalLicenses, result.currency)}`, margin + 5, yPosition);
+        doc.text(`${t.pdf.subtotalLicenses} ${formatCurrency(totalLicenses, result.currency)}`, margin + 5, yPosition);
         yPosition += 12;
       }
     }
@@ -250,14 +596,14 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
       checkPageBreak(20);
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
-      doc.text('ACCÈS AU SOUTIEN TECHNIQUE', margin, yPosition);
+      doc.text(t.pdf.supportAccessSection, margin, yPosition);
       yPosition += 8;
 
       doc.setFontSize(11);
       doc.setFont('helvetica', 'normal');
       const supportDescription = result.numberOfUsers * 10 >= 100
-        ? `Accès au soutien technique (${result.numberOfUsers} utilisateurs × 10 $):`
-        : `Accès au soutien technique (minimum 100 $):`;
+        ? `${t.results.supportAccess} (${result.numberOfUsers} ${language === 'fr' ? 'utilisateurs' : 'users'} × 10 $):`
+        : t.pdf.supportAccessMin;
       doc.text(`${supportDescription} ${formatCurrency(result.additionalFees.supportAccess, result.currency)}`, margin + 5, yPosition);
       yPosition += 12;
     }
@@ -268,12 +614,12 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
       yPosition += 5;
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
-      doc.text('FRAIS UNIQUES', margin, yPosition);
+      doc.text(t.pdf.setupFeesSection, margin, yPosition);
       yPosition += 8;
 
       doc.setFontSize(11);
       doc.setFont('helvetica', 'normal');
-      doc.text(`Frais d'installation: ${exportData.fraisInstallation}`, margin + 5, yPosition);
+      doc.text(`${t.pdf.setupFee} ${exportData.fraisInstallation}`, margin + 5, yPosition);
       yPosition += 12;
     }
 
@@ -282,7 +628,8 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
     yPosition += 5;
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
-    doc.text(`TOTAL ${exportData.periode.toUpperCase()}: ${exportData.total}`, pageWidth / 2, yPosition, { align: 'center' });
+    const totalLabel = result.billingPeriod === 'monthly' ? t.pdf.totalMonthly : t.pdf.totalAnnual;
+    doc.text(`${totalLabel} ${exportData.total}`, pageWidth / 2, yPosition, { align: 'center' });
     doc.setTextColor(0, 0, 0); // Remettre la couleur noire
     yPosition += 12;
 
@@ -291,17 +638,17 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
       checkPageBreak(25);
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
-      doc.text('FRAIS UNIQUES', margin, yPosition);
+      doc.text(t.pdf.setupFeesSection, margin, yPosition);
       yPosition += 8;
 
       doc.setFontSize(11);
       doc.setFont('helvetica', 'normal');
       if (exportData.fraisInstallation !== 'N/A') {
-        doc.text(`Frais d'installation: ${exportData.fraisInstallation}`, margin + 5, yPosition);
+        doc.text(`${t.pdf.setupFee} ${exportData.fraisInstallation}`, margin + 5, yPosition);
         yPosition += 7;
       }
       if (exportData.fraisPriseEnCharge !== 'N/A') {
-        doc.text(`Frais de prise en charge: ${exportData.fraisPriseEnCharge}`, margin + 5, yPosition);
+        doc.text(`${t.pdf.onboardingFee} ${exportData.fraisPriseEnCharge}`, margin + 5, yPosition);
         yPosition += 7;
       }
       yPosition += 5;
@@ -313,13 +660,15 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
     doc.setFontSize(10);
     doc.setFont('helvetica', 'italic');
     doc.setTextColor(100, 100, 100); // Gris
-    const disclaimerText = "Ces prix se veulent une estimation. Une évaluation d'un expert en infonuagique de BZ sera nécessaire pour confirmer les ressources nécessaires au bon fonctionnement de votre application.";
+    const disclaimerText = t.pdf.disclaimer;
     const splitDisclaimer = doc.splitTextToSize(disclaimerText, pageWidth - 2 * margin);
     doc.text(splitDisclaimer, margin, yPosition);
     doc.setTextColor(0, 0, 0); // Remettre la couleur noire
 
     // Sauvegarder le PDF
-    const fileName = `soumission-mirrt-${exportData.nombreUsagers}-usagers-${exportData.date.replace(/\//g, '-')}.pdf`;
+    const filePrefix = language === 'fr' ? 'soumission-mirrt' : 'quote-mirrt';
+    const userLabel = language === 'fr' ? 'usagers' : 'users';
+    const fileName = `${filePrefix}-${exportData.nombreUsagers}-${userLabel}-${exportData.date.replace(/\//g, '-')}.pdf`;
     doc.save(fileName);
   };
 
@@ -382,14 +731,23 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
   return (
     <div className="pricing-calculator">
       <div className="calculator-header">
-        <h1>Datacloudis</h1>
-        <p className="subtitle">Estimez le coût de votre solution !</p>
+        <div className="language-toggle" onClick={() => setLanguage(language === 'en' ? 'fr' : 'en')}>
+          <span className={`lang-option ${language === 'en' ? 'active' : ''}`}>
+            EN
+          </span>
+          <span className={`lang-option ${language === 'fr' ? 'active' : ''}`}>
+            FR
+          </span>
+          <div className={`toggle-slider ${language === 'fr' ? 'fr' : 'en'}`}></div>
+        </div>
+        <h1>{t.header.title}</h1>
+        <p className="subtitle">{t.header.subtitle}</p>
         <img src={datadisLogo} alt="Datadis" className="header-logo" />
         <button 
           className="info-button"
           onClick={() => setShowInfo(true)}
         >
-          Pourquoi le Cloud de BZ ?
+          {t.header.whyBzButton}
         </button>
         
         {showInfo && (
@@ -402,8 +760,8 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                 </div>
                 <div className="modal-title-section">
                   <div>
-                    <h2 className="modal-title">Cloud Privé BZ</h2>
-                    <p className="modal-subtitle">Excellence en infrastructure cloud - Rapport qualité/prix incomparable</p>
+                    <h2 className="modal-title">{t.modal.title}</h2>
+                    <p className="modal-subtitle">{t.modal.subtitle}</p>
                   </div>
                 </div>
                 <button className="modal-close" onClick={() => setShowInfo(false)}>×</button>
@@ -411,43 +769,34 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
 
               <div className="modal-body">
                 <div className="hero-section">
-                  <h3>Notre Cloud Privé : Notre Fierté</h3>
-                  <p>
-                    Le cloud privé de BZ inc. offre un <strong>excellent rapport qualité/prix</strong> avec des <strong>standards de qualité très élevés</strong> et un 
-                    <strong> service humain</strong> qui rend l'infonuagique accessible et très appréciée de plusieurs types d'entreprises et d'organisations.
-                  </p>
+                  <h3>{t.modal.heroTitle}</h3>
+                  <p dangerouslySetInnerHTML={{ __html: t.modal.heroContent }} />
                 </div>
 
                 <div className="features-grid-top">
                   <div className="feature-card">
                     <div className="feature-header">
                       <span className="feature-icon">🏆</span>
-                      <h4>Standards de Qualité Élevés</h4>
+                      <h4>{t.modal.qualityTitle}</h4>
                     </div>
-                    <p className="feature-intro">
-                      Nos <strong>standards sont très élevés</strong> et répondent aux besoins de nos clients avec excellence.
-                    </p>
+                    <p className="feature-intro" dangerouslySetInnerHTML={{ __html: t.modal.qualityIntro }} />
                     <ul className="feature-list">
-                      <li>Infrastructure robuste et redondante</li>
-                      <li>Deux centres de données géographiquement séparés</li>
-                      <li>Batteries multiples et climatisation contrôlée</li>
-                      <li>Monitoring et maintenance proactive</li>
+                      {t.modal.qualityFeatures.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                      ))}
                     </ul>
                   </div>
 
                   <div className="feature-card">
                     <div className="feature-header">
                       <span className="feature-icon">👥</span>
-                      <h4>Service Humain Exceptionnel</h4>
+                      <h4>{t.modal.serviceTitle}</h4>
                     </div>
-                    <p className="feature-intro">
-                      C'est notre <strong>service humain</strong> qui fait toute la différence. Support réactif, personnalisé, et dédié. C'est ce qui rend notre cloud 
-                      privé <strong>très apprécié des clients du Québec et du Canada</strong>.
-                    </p>
+                    <p className="feature-intro" dangerouslySetInnerHTML={{ __html: t.modal.serviceIntro }} />
                     <ul className="feature-list">
-                      <li>Support réactif et personnalisé</li>
-                      <li>Accompagnement dédié</li>
-                      <li>Relation de confiance à long terme</li>
+                      {t.modal.serviceFeatures.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -455,37 +804,33 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                 <div className="feature-card feature-card-full">
                   <div className="feature-header">
                     <span className="feature-icon">💰</span>
-                    <h4>Rapport Qualité/Prix Incomparable</h4>
+                    <h4>{t.modal.priceTitle}</h4>
                   </div>
-                  <p className="feature-intro">
-                    Notre cloud privé offre un <strong>excellent rapport qualité/prix</strong>. Nous offrons deux formules adaptées aux besoins : 
-                    <strong> Environnement dédié</strong> pour le contrôle total, et <strong>Environnement Partagé</strong> pour une solution économique. 
-                    Dans tous les cas, vous bénéficiez de nos standards de qualité et de notre service humain exceptionnel.
-                  </p>
+                  <p className="feature-intro" dangerouslySetInnerHTML={{ __html: t.modal.priceIntro }} />
                 </div>
 
                 <div className="datacenters-section">
                   <div className="datacenter-card">
                     <div className="feature-header">
                       <span className="feature-icon">🏢</span>
-                      <h4>Centre de Données BZ</h4>
+                      <h4>{t.modal.datacenterBzTitle}</h4>
                     </div>
-                    <p>Notre centre de données dans les locaux de BZ inc. offre une infrastructure complète avec tous nos standards de qualité et redondance.</p>
+                    <p>{t.modal.datacenterBzContent}</p>
                   </div>
 
                   <div className="datacenter-card">
                     <div className="feature-header">
                       <span className="feature-icon">🌐</span>
-                      <h4>Centre de Données Oricom (Serco)</h4>
+                      <h4>{t.modal.datacenterOricomTitle}</h4>
                     </div>
-                    <p>Notre deuxième centre de données chez Oricom, salle Serco, offre redondance géographique et haute disponibilité avec les mêmes standards de qualité.</p>
+                    <p>{t.modal.datacenterOricomContent}</p>
                   </div>
                 </div>
               </div>
 
               <div className="modal-footer">
                 <button className="modal-close-button" onClick={() => setShowInfo(false)}>
-                  Fermer
+                  {t.modal.closeButton}
                 </button>
               </div>
             </div>
@@ -496,11 +841,11 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
       <div className="calculator-content">
         <div className="input-section">
           <label htmlFor="numberOfUsers">
-            Nombre d'usagers
+            {t.input.label}
             {config.prerequisites?.minUsers && (
               <span className="hint">
-                (Minimum: {config.prerequisites.minUsers}
-                {config.prerequisites?.maxUsers && `, Maximum: ${config.prerequisites.maxUsers}`})
+                ({t.input.minimum}: {config.prerequisites.minUsers}
+                {config.prerequisites?.maxUsers && `, ${t.input.maximum}: ${config.prerequisites.maxUsers}`})
               </span>
             )}
           </label>
@@ -513,7 +858,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
             onChange={handleUserInputChange}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
-            placeholder="Entrer ici"
+            placeholder={t.input.placeholder}
             className="user-input"
           />
           <button
@@ -524,7 +869,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
             {isCalculating ? (
               <span className="spinner">⏳</span>
             ) : (
-              <>Calculer 💰</>
+              <>{t.input.calculateButton}</>
             )}
           </button>
         </div>
@@ -538,7 +883,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
         {result && (
           <div className="result-section">
             <div className="export-date-time print-only">
-              Date et heure d'exportation: {new Date().toLocaleString('fr-CA', { 
+              {t.results.exportDate} {new Date().toLocaleString(language === 'fr' ? 'fr-CA' : 'en-CA', { 
                 year: 'numeric', 
                 month: '2-digit', 
                 day: '2-digit',
@@ -548,54 +893,54 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
             </div>
             <div className="result-card">
               <div className="result-header">
-                <h2>Résultat du calcul</h2>
+                <h2>{t.results.title}</h2>
                 <div className="result-badge">
-                  {result.numberOfUsers} {result.numberOfUsers === 1 ? 'usager' : 'usagers'}
+                  {result.numberOfUsers} {result.numberOfUsers === 1 ? t.results.user : t.results.users}
                 </div>
               </div>
 
               {/* Configuration des VMs */}
               <div className="vm-configuration">
-                <h3>Configuration des serveurs virtuels</h3>
+                <h3>{t.results.vmConfigTitle}</h3>
                 <div className="vm-details">
                   {result.vmConfiguration.terminalServerCount === 0 ? (
                     <div className="vm-item">
-                      <span className="vm-label">Serveur principal (MIR-RT + Base de données + Terminal Server):</span>
+                      <span className="vm-label">{t.results.mainServerFull}</span>
                       <span className="vm-value">{result.vmConfiguration.mainServerCount} VM</span>
-                      <span className="vm-users">({result.vmConfiguration.usersOnMainServer} usagers)</span>
+                      <span className="vm-users">({result.vmConfiguration.usersOnMainServer} {result.vmConfiguration.usersOnMainServer === 1 ? t.results.user : t.results.users})</span>
                     </div>
                   ) : (
                     <>
                       <div className="vm-item">
-                        <span className="vm-label">Serveur principal (MIR-RT + Base de données + Terminal Server):</span>
+                        <span className="vm-label">{t.results.mainServerFull}</span>
                         <span className="vm-value">{result.vmConfiguration.mainServerCount} VM</span>
-                        <span className="vm-users">({result.vmConfiguration.usersOnMainServer} usagers)</span>
+                        <span className="vm-users">({result.vmConfiguration.usersOnMainServer} {result.vmConfiguration.usersOnMainServer === 1 ? t.results.user : t.results.users})</span>
                       </div>
                       <div className="vm-item">
-                        <span className="vm-label">Terminal Servers supplémentaires:</span>
+                        <span className="vm-label">{t.results.terminalServers}</span>
                         <span className="vm-value">{result.vmConfiguration.terminalServerCount} VM(s)</span>
                         <span className="vm-users">
                           {result.vmConfiguration.terminalServerCount === 1 
-                            ? `(${Math.round(result.vmConfiguration.usersPerTerminalServer)} usagers)`
-                            : `(~${Math.round(result.vmConfiguration.usersPerTerminalServer)} usagers/VM)`
+                            ? `(${Math.round(result.vmConfiguration.usersPerTerminalServer)} ${Math.round(result.vmConfiguration.usersPerTerminalServer) === 1 ? t.results.user : t.results.users})`
+                            : `(~${Math.round(result.vmConfiguration.usersPerTerminalServer)} ${t.results.users}/VM)`
                           }
                         </span>
                       </div>
                     </>
                   )}
                   <div className="vm-item total-vms">
-                    <span className="vm-label">Total de VMs:</span>
+                    <span className="vm-label">{t.results.totalVMs}</span>
                     <span className="vm-value">{result.vmConfiguration.totalVMs}</span>
                   </div>
                 </div>
               </div>
 
               <div className="result-details">
-                <h3>Détail des coûts ({result.billingPeriod === 'monthly' ? 'mensuel' : 'annuel'})</h3>
+                <h3>{t.results.costDetailsTitle} ({result.billingPeriod === 'monthly' ? t.results.monthly : t.results.annual})</h3>
 
                 {result.breakdown.userLicensesCost > 0 && (
                   <div className="detail-row">
-                    <span className="detail-label">Licences utilisateurs:</span>
+                    <span className="detail-label">{t.results.userLicenses}</span>
                     <span className="detail-value">
                       {formatCurrency(result.breakdown.userLicensesCost, result.currency)}
                     </span>
@@ -604,7 +949,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
 
                 {result.breakdown.databaseCost > 0 && (
                   <div className="detail-row">
-                    <span className="detail-label">Base de données:</span>
+                    <span className="detail-label">{t.results.database}</span>
                     <span className="detail-value">
                       {formatCurrency(result.breakdown.databaseCost, result.currency)}
                     </span>
@@ -613,7 +958,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
 
                 {result.breakdown.gatewayCost > 0 && (
                   <div className="detail-row">
-                    <span className="detail-label">Passerelles:</span>
+                    <span className="detail-label">{t.results.gateways}</span>
                     <span className="detail-value">
                       {formatCurrency(result.breakdown.gatewayCost, result.currency)}
                     </span>
@@ -624,9 +969,9 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                   <>
                     <div className="detail-divider"></div>
                     <div className="resources-detail">
-                      <h4>ACCÈS AU SOUTIEN TECHNIQUE</h4>
+                      <h4>{t.results.supportAccessTitle}</h4>
                       <div className="resource-item">
-                        <span>Accès au soutien technique:</span>
+                        <span>{t.results.supportAccess}</span>
                         <span>{formatCurrency(result.additionalFees.supportAccess, result.currency)}</span>
                       </div>
                     </div>
@@ -636,7 +981,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                 {/* RESSOURCES INFONUAGIQUE (selon la grille Couts.pdf) */}
                 <div className="detail-divider"></div>
                 <div className="resources-detail">
-                  <h4>RESSOURCES INFONUAGIQUE</h4>
+                  <h4>{t.results.cloudResources}</h4>
                   
                   {(() => {
                     const totalVMBase = (result.breakdown.mainServerResources?.vmBase || 0) + 
@@ -673,23 +1018,23 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                     return (
                       <>
                         <div className="resource-item">
-                          <span>Machines virtuelles ({nbVMs} VM × {formatCurrency(config.costs.vmBaseCost, result.currency)}):</span>
+                          <span>{t.results.virtualMachines} ({nbVMs} VM × {formatCurrency(config.costs.vmBaseCost, result.currency)}):</span>
                           <span>{formatCurrency(totalVMBase, result.currency)}</span>
                         </div>
                         <div className="resource-item">
-                          <span>Processeurs ({nbCPUs} × {formatCurrency(config.costs.cpuCost, result.currency)}):</span>
+                          <span>{t.results.processors} ({nbCPUs} × {formatCurrency(config.costs.cpuCost, result.currency)}):</span>
                           <span>{formatCurrency(totalCPUs, result.currency)}</span>
                         </div>
                         <div className="resource-item">
-                          <span>RAM Provisionné ({ramGB.toFixed(1)} Go × {formatCurrency(config.costs.ramCostPerGB, result.currency)}):</span>
+                          <span>{t.results.ramProvisioned} ({ramGB.toFixed(1)} Go × {formatCurrency(config.costs.ramCostPerGB, result.currency)}):</span>
                           <span>{formatCurrency(totalRAM, result.currency)}</span>
                         </div>
                         <div className="resource-item">
-                          <span>Espace disque Provisionné ({diskGB} Go × {formatCurrency(config.costs.diskCostPerGB, result.currency)}):</span>
+                          <span>{t.results.diskSpace} ({diskGB} Go × {formatCurrency(config.costs.diskCostPerGB, result.currency)}):</span>
                           <span>{formatCurrency(totalDisk, result.currency)}</span>
                         </div>
                         <div className="resource-item resource-total">
-                          <span>Sous-total - Ressources Infonuagique:</span>
+                          <span>{t.results.subtotalResources}</span>
                           <span>{formatCurrency(subtotalResources, result.currency)}</span>
                         </div>
                       </>
@@ -702,12 +1047,12 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                   <>
                     <div className="detail-divider"></div>
                     <div className="resources-detail">
-                      <h4>LICENCES</h4>
+                      <h4>{t.results.licenses}</h4>
                       
                       {/* Licences SPLA */}
                       {result.breakdown.terminalServerCALCost > 0 && (
                         <div className="resource-item">
-                          <span>CAL Terminal Serveur ({result.numberOfUsers} CAL × {formatCurrency(config.costs.terminalServerCALCost, result.currency)}):</span>
+                          <span>{t.results.calTerminalServer} ({result.numberOfUsers} CAL × {formatCurrency(config.costs.terminalServerCALCost, result.currency)}):</span>
                           <span>{formatCurrency(result.breakdown.terminalServerCALCost, result.currency)}</span>
                         </div>
                       )}
@@ -715,7 +1060,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                       {/* Double authentification Duo Security */}
                       {result.breakdown.duoSecurityCost > 0 && (
                         <div className="resource-item">
-                          <span>Double authentification Duo Security ({result.numberOfUsers} utilisateurs × {formatCurrency(config.costs.duoSecurityCost, result.currency)}):</span>
+                          <span>{t.results.duoSecurity} ({result.numberOfUsers} {result.numberOfUsers === 1 ? t.results.user : t.results.users} × {formatCurrency(config.costs.duoSecurityCost, result.currency)}):</span>
                           <span>{formatCurrency(result.breakdown.duoSecurityCost, result.currency)}</span>
                         </div>
                       )}
@@ -723,7 +1068,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                       {/* Sous-total des licences */}
                       {(result.breakdown.terminalServerCALCost > 0 || result.breakdown.duoSecurityCost > 0) && (
                         <div className="resource-item resource-total">
-                          <span>Sous-total - Licences:</span>
+                          <span>{t.results.subtotalLicenses}</span>
                           <span>{formatCurrency((result.breakdown.terminalServerCALCost || 0) + (result.breakdown.duoSecurityCost || 0), result.currency)}</span>
                         </div>
                       )}
@@ -733,7 +1078,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
 
                 <div className="detail-divider"></div>
                 <div className="detail-row total">
-                  <span className="detail-label">Total {result.billingPeriod === 'monthly' ? 'mensuel' : 'annuel'}:</span>
+                  <span className="detail-label">{t.results.total} {result.billingPeriod === 'monthly' ? t.results.monthly : t.results.annual}:</span>
                   <span className="detail-value">
                     {formatCurrency(result.total, result.currency)}
                   </span>
@@ -743,7 +1088,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                   <>
                     <div className="detail-divider"></div>
                     <div className="detail-row onboarding-fee">
-                      <span className="detail-label">Frais de prise en charge:</span>
+                      <span className="detail-label">{t.results.onboardingFee}</span>
                       <span className="detail-value">
                         {formatCurrency(result.additionalFees.onboarding, result.currency)}
                       </span>
@@ -755,7 +1100,7 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
                   <>
                     <div className="detail-divider"></div>
                     <div className="detail-row setup-fee">
-                      <span className="detail-label">Frais d'installation (unique):</span>
+                      <span className="detail-label">{t.results.setupFeeUnique}</span>
                       <span className="detail-value">
                         {formatCurrency(result.additionalFees.setup, result.currency)}
                       </span>
@@ -767,16 +1112,16 @@ export default function PricingCalculator({ config }: PricingCalculatorProps) {
               {/* Disclaimer */}
               <div className="disclaimer-box">
                 <p className="disclaimer-text">
-                  Ces prix se veulent une estimation. Une évaluation d'un expert en infonuagique de BZ sera nécessaire pour confirmer les ressources nécessaires au bon fonctionnement de votre application.
+                  {t.results.disclaimer}
                 </p>
               </div>
 
               <div className="result-actions">
                 <button onClick={handleExport} className="btn btn-export">
-                  📥 Exporter la soumission
+                  {t.results.exportButton}
                 </button>
                 <button onClick={handlePrint} className="btn btn-print">
-                  🖨️ Imprimer
+                  {t.results.printButton}
                 </button>
               </div>
             </div>
