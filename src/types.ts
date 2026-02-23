@@ -26,10 +26,10 @@ export interface ServerResources {
  */
 export interface ResourceCosts {
   // Coûts unitaires BZ Cloud
-  vmBaseCost: number; // Coût de base par VM (6,05 $)
-  cpuCost: number; // Coût par processeur (32,10 $)
-  ramCostPerGB: number; // Coût par Go de RAM (6,80 $)
-  diskCostPerGB: number; // Coût par Go de disque (0,16 $)
+  vmBaseCost: number; // Coût de base par VM (6,50 $)
+  cpuCost: number; // Coût par processeur (34,35 $)
+  ramCostPerGB: number; // Coût par Go de RAM (7,30 $)
+  diskCostPerGB: number; // Coût par Go de disque (0,17 $)
   
   // Licences SPLA
   terminalServerCALCost: number; // Coût par CAL Terminal Serveur (11,36 $)

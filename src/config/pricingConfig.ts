@@ -28,10 +28,10 @@ export const defaultPricingConfig: CloudPricingConfig = {
   // Coûts des ressources BZ Cloud (basés sur Couts.pdf)
   costs: {
     // Coûts unitaires BZ Cloud
-    vmBaseCost: 6.05, // Coût de base par VM
-    cpuCost: 32.10, // Coût par processeur
-    ramCostPerGB: 6.80, // Coût par Go de RAM
-    diskCostPerGB: 0.16, // Coût par Go de disque
+    vmBaseCost: 6.50, // Coût de base par VM
+    cpuCost: 34.35, // Coût par processeur
+    ramCostPerGB: 7.30, // Coût par Go de RAM
+    diskCostPerGB: 0.17, // Coût par Go de disque
     
     // Licences SPLA
     terminalServerCALCost: 11.36, // Coût par CAL Terminal Serveur
